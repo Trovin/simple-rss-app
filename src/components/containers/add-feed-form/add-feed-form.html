@@ -1,0 +1,14 @@
+<form class="wrapper" @submit.prevent="handleSubmit()">
+
+  <div class="feed-container">
+    <input
+      class="form-input"
+      v-model="feedApi"
+      type="url"
+      @blur="isFeedTouched = true"
+      :class="{ error: isFeedError }">
+    <button class="btn" :disabled="!isFeedValid" type="submit">Add new</button>
+  </div>
+
+  <div class="error-message" v-if="isFeedError">Wrong data</div>
+</form>

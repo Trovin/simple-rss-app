@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <h2 v-if="!titles">Feeds is empty ...</h2>
+  <nav>
+    <ul class="feed-list">
+      <li
+        class="feed-item fade-in"
+        v-for="title in titles" :key="title"
+        v-on:click="selectCategory(title)"
+        v-bind:class="{ 'feed-item_active': selectedCategory === title}">
+        {{title}}
+      </li>
+    </ul>
+  </nav>
+</div>

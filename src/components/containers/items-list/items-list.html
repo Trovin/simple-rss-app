@@ -1,0 +1,16 @@
+<div class="wrapper fade-in">
+  <loader v-if="isLoading || !activeCategory"></loader>
+
+  <nav class="box">
+    <ul class="feed-list" v-if="items">
+      <li
+        class="feed-item"
+        v-for="item in items" :key="items.guid"
+        v-on:click="selectItem(item)"
+        v-if="item.category == activeCategory"
+        v-bind:class="{ 'feed-item_active': selectedItem.guid === item.guid }">
+        <h3 class="feed-title">Title: {{item.title}}</h3>
+      </li>
+    </ul>
+  </nav>
+</div>

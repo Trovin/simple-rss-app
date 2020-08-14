@@ -1,0 +1,8 @@
+<article class="wrapper fade-in box" v-if="postItem">
+  <h3 class="post-title">Title: {{postItem.title}}</h3>
+
+  <div>
+    <p v-html="postItem.content" class="post-content"></p>
+    <h5 class="author">Author: {{postItem.itunes.author || 'Unknown'}}</h5>
+  </div>
+</article>

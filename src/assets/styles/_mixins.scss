@@ -1,0 +1,57 @@
+@import 'variables';
+
+@mixin margin {
+  margin-bottom: 10px;
+}
+
+@mixin fonts {
+  box-sizing: border-box;
+  font-family: $base-fonts;
+  font-weight: 400;
+}
+
+@mixin rotate-animation {
+  animation: rotate 10s infinite linear;
+}
+
+@mixin bubble-animation {
+  animation: bubble $transition linear;
+}
+
+@mixin fade-in {
+  animation: fadeIn $long-transition linear;
+}
+
+
+/* keyframes */
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes bubble {
+  0% {
+    opacity: .9;
+    width: 0;
+    height: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
