@@ -18,8 +18,8 @@ export default new Vuex.Store({
     selectedFeedItem: '',
     selectedFeedCategory: '',
     feedsList: [
-      'https://www.omnycontent.com/d/playlist/d83f52e4-2455-47f4-982e-ab790120b954/c60c7fde-12c3-42c0-b017-ab8601030664/d9d8c960-d59c-41c7-86a3-ab8601030664/podcast.rss',
-      'https://www.omnycontent.com/d/playlist/d83f52e4-2455-47f4-982e-ab790120b954/b512ced2-e5f4-435e-9af2-ab8600e7650e/6d35366b-8259-4f57-8852-ab8600e76521/podcast.rss',
+      'https://www.omnycontent.com/d/playlist/d83f52e4-2455-47f4-982e-ab790120b954/0662f610-d693-473a-b06a-ab86010e979c/8a5860a3-0e13-40eb-93e5-ab86010e97a0/podcast.rss',
+      'https://www.omnycontent.com/d/playlist/d83f52e4-2455-47f4-982e-ab790120b954/91ee4c75-d63f-4c31-9357-abdb00d78cf6/12b2443c-b51e-46c5-b23e-abdb00d83f93/podcast.rss'
     ]
   },
   mutations: {
@@ -69,7 +69,6 @@ export default new Vuex.Store({
         this.commit('parseFeedData', feed);
       })
     }
-
   },
   modules: {}
 })
