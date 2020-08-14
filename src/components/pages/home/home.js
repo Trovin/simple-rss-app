@@ -1,19 +1,19 @@
-import post from '../../containers/post/index.vue'
 import feeds from '../../containers/feeds/index.vue'
+import feedForm from '../../containers/feed-form/index.vue'
 import itemsList from '../../containers/items-list/index.vue'
 import statistic from '../../containers/statistic/index.vue'
-import addFeedForm from '../../containers/add-feed-form/index.vue'
-import headerSection from '../../containers/base-layers/header/index.vue'
+import singlePost from '../../containers/single-post/index.vue'
+import headerSection from '../../base-layers/header/index.vue'
 
 export default {
   name: 'home',
   components: {
-    post,
     feeds,
+    feedForm,
     itemsList,
     statistic,
-    addFeedForm,
-    headerSection,
+    singlePost,
+    headerSection
   },
   data () {
     return {}

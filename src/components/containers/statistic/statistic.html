@@ -1,13 +1,11 @@
-<section class="wrapper box statistic">
-  <h2 class="statistic-headline">{{headline}}</h2>
-
+<section class="wrapper statistic">
   <ul class="statistic-list">
     <li>All active channels: {{channelsLength}}</li>
     <li v-if="selectedFeed">Number of posts: {{selectedFeedLength}}</li>
     <li v-if="selectedFeed">Number of authors: {{selectedAuthorLength}}</li>
   </ul>
 
-  <template v-if="selectedFeed">
+  <template>
     <chart v-bind:values="getItemInfo.values" v-bind:names="getItemInfo.names"></chart>
   </template>
 </section>

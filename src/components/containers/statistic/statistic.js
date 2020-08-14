@@ -5,7 +5,7 @@ export default {
   components: {
     chart
   },
-  props: ['headline'],
+  props: [],
   data () {
     return {}
    },
@@ -18,6 +18,7 @@ export default {
         names: [],
         values: []
       };
+
       const NAMES = [];
       const VALUES = [];
 
@@ -34,14 +35,14 @@ export default {
       }
       return stats;
     },
-    selectedCategory: function() {
-      return this.$store.state.selectedFeedCategory;
-    },
     selectedFeed: function() {
       return this.$store.state.feeds.find(feed => feed.title === this.selectedCategory);
     },
     channelsLength: function() {
       return this.$store.state.feedsList.length;
+    },
+    selectedCategory: function() {
+      return this.$store.state.selectedFeedCategory;
     },
     selectedFeedLength: function() {
       return this.selectedFeed.items.length;
@@ -53,7 +54,7 @@ export default {
   mounted () {
     this.$store.subscribe(mutation => {
       if (mutation.type === 'setSelectedItem') {
-        console.log(this.getItemInfo);
+        this.getItemInfo();
       }
     });
   },

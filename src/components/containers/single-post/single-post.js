@@ -1,5 +1,5 @@
 export default {
-  name: 'post',
+  name: 'singlePost',
   components: {},
   props: [],
   data () {
