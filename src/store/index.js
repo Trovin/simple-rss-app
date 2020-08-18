@@ -29,10 +29,9 @@ import {
 
 import Parser from 'rss-parser';
 
-const PROXY = 'https://cors-anywhere.herokuapp.com/';
 const PARSER = new Parser();
 
-const getData = (api) => PARSER.parseURL(PROXY + api);
+const getData = (api) => PARSER.parseURL(api);
 
 Vue.use(Vuex);
 
