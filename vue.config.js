@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/',
+  publicPath: './',
   runtimeCompiler: true,
   configureWebpack: {
     module: {
