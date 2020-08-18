@@ -2,7 +2,7 @@
   <div class="wrapper statistic">
     <p class="statistic-item">
       All active channels:
-      <span class="statistic-item__value">{{feedLength}}</span>
+      <span class="statistic-item__value">{{feedsLength}}</span>
     </p>
     <p class="statistic-item" v-if="!selectedFeed">
       All posts:
@@ -17,7 +17,7 @@
       <span class="statistic-item__value">{{selectedFeedAuthorsLength}}</span>
     </p>
 
-    <template v-if="selectedFeed">
+    <template v-if="selectedItem">
       <Chart v-bind:values="getItemInfo.values" v-bind:names="getItemInfo.names"></Chart>
     </template>
   </div>
@@ -25,6 +25,14 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+
+import {
+  GET_FEEDS_LENGTH,
+  GET_SELECTED_FEED,
+  GET_FEEDS_ITEMS_LENGTH,
+  GET_SELECTED_FEED_ITEMS_LENGTH,
+  GET_SELECTED_FEED_AUTHORS_LENGTH
+} from "../../store/getters";
 
 import Chart from '../elements/Chart.vue'
 
@@ -38,11 +46,16 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['feedLength', 'selectedFeed', 'feedsItemsLength', 'selectedFeedItemsLength', 'selectedFeedAuthorsLength']),
+    ...mapGetters({
+      feedsLength: GET_FEEDS_LENGTH,
+      selectedFeed: GET_SELECTED_FEED,
+      feedsItemsLength: GET_FEEDS_ITEMS_LENGTH,
+      selectedFeedItemsLength: GET_SELECTED_FEED_ITEMS_LENGTH,
+      selectedFeedAuthorsLength: GET_SELECTED_FEED_AUTHORS_LENGTH
+    }),
     ...mapState({
       feedsList: state => state.feedsList,
       selectedItem: state => state.selectedFeedItem,
-      channelsLength: state => state.feedsList.length,
       selectedCategory: state => state.selectedFeedCategory
     }),
     getItemInfo: function() {

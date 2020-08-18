@@ -15,6 +15,8 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex';
 
+import { GET_ITEMS } from "../../store/getters";
+
 import { SET_SELECTED_ITEM, SET_ACTIVE_CATEGORY } from '../../store/mutations';
 
 export default {
@@ -25,7 +27,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters({ items: 'getItems' }),
+    ...mapGetters({ items: GET_ITEMS }),
     ...mapState({
       isLoading: 'loading',
       selectedItem: 'selectedFeedItem',

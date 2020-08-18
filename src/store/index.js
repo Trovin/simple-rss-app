@@ -2,6 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import {
+  GET_ITEMS,
+  GET_FEEDS_LENGTH,
+  GET_SELECTED_FEED,
+  GET_FEEDS_ITEMS_LENGTH,
+  GET_SELECTED_FEED_ITEMS_LENGTH,
+  GET_SELECTED_FEED_AUTHORS_LENGTH
+} from './getters';
+
+import {
   SET_FEEDS,
   SET_NEW_FEED,
   SET_ITEMS_LIST,
@@ -42,18 +51,18 @@ export default new Vuex.Store({
     ]
   },
   getters: {
-    getItems: state => {
+    [GET_ITEMS]: state => {
       if(!state.selectedFeedCategory) {
         return state.itemsList;
       } else {
         return state.itemsList.filter(el => el.category === state.selectedFeedCategory);
       }
     },
-    feedLength: state => state.feeds.length,
-    selectedFeed: state => state.feeds.find(feed => feed.title === state.selectedFeedCategory),
-    feedsItemsLength: state => state.itemsList.length,
-    selectedFeedItemsLength: state => state.feeds.find(feed => feed.title === state.selectedFeedCategory).items.length,
-    selectedFeedAuthorsLength: state => {
+    [GET_FEEDS_LENGTH]: state => state.feeds.length,
+    [GET_SELECTED_FEED]: state => state.feeds.find(feed => feed.title === state.selectedFeedCategory),
+    [GET_FEEDS_ITEMS_LENGTH]: state => state.itemsList.length,
+    [GET_SELECTED_FEED_ITEMS_LENGTH]: state => state.feeds.find(feed => feed.title === state.selectedFeedCategory).items.length,
+    [GET_SELECTED_FEED_AUTHORS_LENGTH]: state => {
       const item = state.feeds.find(feed => feed.title === state.selectedFeedCategory);
       return Array.from(new Set(item.items.map(item => item.itunes.author))).length;
     }
