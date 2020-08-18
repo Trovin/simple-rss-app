@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <home></home>
+    <Home></Home>
   </div>
 </template>
 
 <script>
-  import home from './components/pages/home/index.vue'
+  import Home from './components/pages/Home.vue'
 
   export default {
-    name: 'rss-app',
-    components: { home }
+    name: 'App',
+    components: { Home }
   }
 </script>
 

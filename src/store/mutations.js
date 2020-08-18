@@ -1,0 +1,9 @@
+export const SET_FEEDS = "setFeeds";
+export const SET_NEW_FEED = "setNewFeed";
+export const SET_ITEMS_LIST = "setItemsList";
+export const SET_TITLES_LIST = "setTitlesList";
+export const PARSE_FEED_DATA = "parseFeedData";
+export const PARSE_FEEDS_DATA = "parseFeedsData";
+export const SET_LOADING_STATE = "setLoadingState";
+export const SET_SELECTED_ITEM = "setSelectedItem";
+export const SET_ACTIVE_CATEGORY = "setActiveCategory";
