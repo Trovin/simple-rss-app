@@ -21,11 +21,6 @@ import { SET_SELECTED_ITEM, SET_ACTIVE_CATEGORY } from '../../store/mutations';
 
 export default {
   name: 'FeedItemsList',
-  components: {},
-  props: [],
-  data () {
-    return {}
-  },
   computed: {
     ...mapGetters({ items: GET_ITEMS }),
     ...mapState({
@@ -34,7 +29,6 @@ export default {
       activeCategory: 'selectedFeedCategory'
     }),
   },
-  mounted () {},
   methods: {
     ...mapMutations({ selectItem: SET_SELECTED_ITEM, setCategory: SET_ACTIVE_CATEGORY }),
     setActiveItem(item) {
@@ -46,6 +40,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/variables.scss';
+
   .feed-items {
     list-style: none;
   }
@@ -70,7 +66,7 @@ export default {
     cursor: pointer;
 
     &_active .feed-item__title {
-      color: #ff7546;
+      color: $theme-color;
     }
   }
 </style>

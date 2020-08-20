@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+.theme {
+  color: $theme-color;
+}
+
 .form-field {
   width: 100%;
   cursor: pointer;
@@ -71,10 +75,6 @@
   max-width: 33.3333%;
   flex-grow: 1;
   flex-shrink: 1;
-}
-
-.theme-text {
-  color: $theme-color;
 }
 
 .fade-in {

@@ -27,11 +27,9 @@ import {
   ADD_NEW_FEED
 } from './actions';
 
-import Parser from 'rss-parser';
-
-const PARSER = new Parser();
-
-const getData = (api) => PARSER.parseURL(api);
+import { getData } from './helper';
+import { setItems } from './helper';
+import { validation } from './helper';
 
 Vue.use(Vuex);
 
@@ -74,8 +72,7 @@ export default new Vuex.Store({
       this.state.feedsList.push(api);
     },
     [SET_ITEMS_LIST] (state, props) {
-      props.items.forEach(item => item.category = props.category);
-      this.state.itemsList = [...this.state.itemsList, ...props.items];
+      setItems(state, props);
     },
     [SET_TITLES_LIST] (state, list) {
       this.state.titlesList.push(list);
@@ -84,30 +81,35 @@ export default new Vuex.Store({
       this.state.loading = isLoading;
     },
     [PARSE_FEED_DATA] (state, feed) {
-      this.commit(SET_FEEDS, feed);
-      this.commit(SET_ITEMS_LIST, { category: feed.title, items: feed.items});
-      this.commit(SET_TITLES_LIST, feed.title);
-      this.commit(SET_LOADING_STATE, false);
+      this.state.feeds.push(feed);
+      setItems(state, { category: feed.title, items: feed.items });
+      this.state.titlesList.push(feed.title);
+      this.state.loading = false;
     },
     [PARSE_FEEDS_DATA] (state, feeds) {
-      feeds.forEach(feed => this.commit(PARSE_FEED_DATA, feed))
+      feeds.forEach(feed => {
+        this.state.feeds.push(feed);
+        setItems(state, { category: feed.title, items: feed.items });
+        this.state.titlesList.push(feed.title);
+      });
+      this.state.loading = false;
     },
     [SET_SELECTED_ITEM] (state, item) {
       this.state.selectedFeedItem = item;
     },
     [SET_ACTIVE_CATEGORY] (state, category) {
-      this.commit(SET_SELECTED_ITEM, '');
+      this.state.selectedFeedItem = '';
       this.state.selectedFeedCategory = category;
     }
   },
   actions: {
-    async [INIT_FEEDS] () {
+    async [INIT_FEEDS] (context) {
       const feeds = [];
       this.commit(SET_LOADING_STATE, true);
 
       async function processArray(apiList) {
         for (let api of apiList) {
-          const feed = await getData(api);
+          const feed = await getData(context, api);
           feeds.push(feed);
         }
       }
@@ -115,9 +117,10 @@ export default new Vuex.Store({
       await processArray(this.state.feedsList);
       this.commit(PARSE_FEEDS_DATA, feeds);
     },
-    async [ADD_NEW_FEED] (state, payload) {
+    async [ADD_NEW_FEED] (context, payload) {
       this.commit(SET_LOADING_STATE, true);
-      const feed = await getData(payload.api);
+      const feed = await getData(context, payload.api);
+      validation(context, feed);
       this.commit(PARSE_FEED_DATA, feed);
     }
   },

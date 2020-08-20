@@ -11,29 +11,24 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'SinglePost',
-  components: {},
-  props: [],
-  data () {
-    return {}
-  },
   computed: mapState({
     postItem: state => state.selectedFeedItem
-  }),
-  mounted () {},
-  methods: {}
+  })
 }
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/variables.scss';
+
   .post-title {
-    color: #675597;
+    color: $post-color;
     font-size: 20px;
     margin-bottom: 30px;
     text-align: center;
   }
 
   .post-content {
-    color: #675597;
+    color: $post-color;
     font-size: 16px;
     line-height: 140%;
     margin-bottom: 20px;

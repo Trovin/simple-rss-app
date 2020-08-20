@@ -41,10 +41,6 @@ export default {
   components: {
     Chart
   },
-  props: [],
-  data () {
-    return {}
-  },
   computed: {
     ...mapGetters({
       feedsLength: GET_FEEDS_LENGTH,
@@ -70,7 +66,6 @@ export default {
       if(this.selectedItem.content) {
         const content = this.selectedItem.content.toLowerCase().replace(/[^a-zA-Z]/g,'');
         const letters_list = new Set(content);
-        console.log(letters_list);
         for (let letter of letters_list) {
           let count = content.split(letter).length - 1;
           names.push(letter);
@@ -81,13 +76,13 @@ export default {
       }
       return stats;
     }
-  },
-  mounted () {},
-  methods: {}
+  }
 }
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/variables.scss';
+
   .statistic {
     text-align: center;
     border-left: 2px solid #ccc;
@@ -101,6 +96,6 @@ export default {
   }
 
   .statistic-item__value {
-    color: #ff7546;
+    color: $theme-color;
   }
 </style>

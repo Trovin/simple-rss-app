@@ -10,24 +10,18 @@
 
 <script>
 export default {
-  name: 'Header',
-  components: {},
-  props: [],
-  data () {
-    return {}
-  },
-  computed: {},
-  mounted () {},
-  methods: {}
+  name: 'Header'
 }
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/variables.scss';
+
   .header {
     padding: 20px;
     text-align: center;
     color: #fff;
-    background-color: #ff7546;
+    background-color: $theme-color;
   }
 
   .header-headline {

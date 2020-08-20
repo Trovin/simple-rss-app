@@ -34,9 +34,6 @@ export default {
     FeedItemsList,
     FeedTitlesList
   },
-  data () {
-    return {}
-  },
   methods: {
     ...mapActions(['initFeeds'])
   },

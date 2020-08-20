@@ -24,8 +24,6 @@ const URL_REGEX = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0
 
 export default {
   name: 'FeedForm',
-  components: {},
-  props: [],
   data () {
     return {
       feedApi: null,
@@ -40,7 +38,6 @@ export default {
       return !this.isFeedValid && this.isFeedTouched;
     },
   },
-  mounted () {},
   methods: {
     ...mapActions({ addNewFeed: ADD_NEW_FEED }),
     handleSubmit() {

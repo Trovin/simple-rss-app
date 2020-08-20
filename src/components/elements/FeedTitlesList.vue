@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
     <h2 v-if="!titles">Feeds is empty ...</h2>
-    <h2 v-if="loading">Loading ...</h2>
+    <h2 v-if="loading" class="theme">Loading ...</h2>
+
     <nav>
       <ul>
         <li
@@ -23,17 +24,11 @@ import { SET_ACTIVE_CATEGORY } from '../../store/mutations';
 
 export default {
   name: 'FeedTitlesList',
-  components: {},
-  props: [],
-  data () {
-    return {}
-  },
   computed: mapState({
     titles: state => state.titlesList,
-    loading: state => state.loading,
+    loading: state => state.isLoading,
     selectedCategory: state => state.selectedFeedCategory
   }),
-  mounted () {},
   methods: {
     ...mapMutations({ setActiveCategory: SET_ACTIVE_CATEGORY })
   }
@@ -41,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/variables.scss';
+
   .feed-title {
     font-family: 'Helvetica', 'sans-serif', 'serif';
     transition: .4s;
@@ -50,7 +47,7 @@ export default {
     text-transform: uppercase;
 
     &_active {
-      color: #ff7546;
+      color: $theme-color;
     }
   }
 </style>

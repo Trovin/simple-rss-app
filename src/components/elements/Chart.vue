@@ -20,13 +20,7 @@
 <script>
 export default {
   name: 'Chart',
-  components: {},
   props: ['values', 'names'],
-  data () {
-    return {}
-  },
-  computed: {},
-  mounted () {},
   methods: {
     dataFormat(a, b) {
       if(b) return b + '%';
