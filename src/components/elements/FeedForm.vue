@@ -1,6 +1,6 @@
 <template>
   <form class="wrapper" @submit.prevent="handleSubmit()">
-    <div class="form-item">
+    <div class="form-container">
       <input
         class="form-input"
         v-model="feedApi"
@@ -50,14 +50,16 @@ export default {
 </script>
 
 <style lang="scss">
-  .form-item {
+  @import '../../assets/styles/variables.scss';
+
+  .form-container {
     display: flex;
   }
 
   .form-input {
     width: 100%;
     border: 0;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid $border;
     margin-right: 30px;
   }
 </style>

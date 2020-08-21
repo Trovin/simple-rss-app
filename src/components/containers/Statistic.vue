@@ -1,29 +1,33 @@
 <template>
   <div class="wrapper statistic">
     <p class="statistic-item">
-      All active channels:
-      <span class="statistic-item__value">{{feedsLength}}</span>
+      All active channels: <span class="statistic-value">{{feedsLength}}</span>
     </p>
+
     <p class="statistic-item" v-if="!selectedFeed">
-      All posts:
-      <span class="statistic-item__value">{{feedsItemsLength}}</span>
+      All posts: <span class="statistic-value">{{feedsItemsLength}}</span>
     </p>
+
     <p class="statistic-item" v-if="selectedFeed">
-      Selected feed posts:
-      <span class="statistic-item__value">{{selectedFeedItemsLength}}</span>
+      Selected feed posts: <span class="statistic-value">{{selectedFeedItemsLength}}</span>
     </p>
-    <p class="statistic-item" v-if="selectedFeed">
-      Number of authors:
-      <span class="statistic-item__value">{{selectedFeedAuthorsLength}}</span>
+
+    <p class="statistic-item statistic-item__author" v-if="selectedFeed">
+      Number of authors: <span class="statistic-value">{{selectedFeedAuthorsLength}}</span>
     </p>
 
     <template v-if="selectedItem">
-      <Chart v-bind:values="getItemInfo.values" v-bind:names="getItemInfo.names"></Chart>
+      <Chart
+        v-bind:values="chartData.values"
+        v-bind:labels="chartData.labels"
+        v-bind:colors="chartData.colors">
+      </Chart>
     </template>
   </div>
 </template>
 
 <script>
+import { randomColor } from 'randomcolor';
 import { mapState, mapGetters } from 'vuex';
 
 import {
@@ -54,25 +58,22 @@ export default {
       selectedItem: state => state.selectedFeedItem,
       selectedCategory: state => state.selectedFeedCategory
     }),
-    getItemInfo: function() {
+    chartData: function() {
       const stats = {
-        names: [],
-        values: []
+        labels: [],
+        values: [],
+        colors: []
       };
-
-      const names = [];
-      const values = [];
 
       if(this.selectedItem.content) {
         const content = this.selectedItem.content.toLowerCase().replace(/[^a-zA-Z]/g,'');
         const letters_list = new Set(content);
         for (let letter of letters_list) {
           let count = content.split(letter).length - 1;
-          names.push(letter);
-          values.push(count);
+          stats.labels.push(letter);
+          stats.values.push(count);
+          stats.colors.push(randomColor({ luminosity: 'light' }));
         }
-        stats.names = names;
-        stats.values = values;
       }
       return stats;
     }
@@ -85,17 +86,22 @@ export default {
 
   .statistic {
     text-align: center;
-    border-left: 2px solid #ccc;
-    border-right: 2px solid #ccc;
+    border-left: 2px solid $border;
+    border-right: 2px solid $border;
   }
 
   .statistic-item {
-    color: #929292;
-    margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
+    color: $text-color;
+    line-height: 120%;
+    margin-bottom: 5px;
+
+    &__author {
+      margin-bottom: 30px;
+    }
   }
 
-  .statistic-item__value {
+  .statistic-value {
     color: $theme-color;
   }
 </style>

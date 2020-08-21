@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/mixins.scss';
   @import '../../assets/styles/variables.scss';
 
   .feed-items {
@@ -47,16 +48,16 @@ export default {
   }
 
   .feed-item__title {
-    font-family: 'Helvetica', 'sans-serif', 'serif';
+    @include fonts;
     position: relative;
     transition: .2s;
     font-size: 16px;
-    color: #929292;
+    color: $text-color;
     text-align: left;
     line-height: 120%;
 
     &:hover {
-      color: #000;
+      color: $black-color;
     }
   }
 

@@ -3,17 +3,14 @@
     <h2 v-if="!titles">Feeds is empty ...</h2>
     <h2 v-if="loading" class="theme">Loading ...</h2>
 
-    <nav>
-      <ul>
-        <li
-          class="feed-title fade-in"
-          v-for="title in titles" :key="title"
-          v-on:click="setActiveCategory(title)"
-          v-bind:class="{ 'feed-title_active': selectedCategory === title}">
-          {{title}}
-        </li>
-      </ul>
-    </nav>
+    <div v-for="title in titles" :key="title">
+      <span
+        class="feed-title fade-in"
+        v-on:click="setActiveCategory(title)"
+        v-bind:class="{ 'feed-title_active': selectedCategory === title }">
+        {{title}}
+    </span>
+    </div>
   </div>
 </template>
 
@@ -36,14 +33,16 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../../assets/styles/mixins.scss';
   @import '../../assets/styles/variables.scss';
 
   .feed-title {
-    font-family: 'Helvetica', 'sans-serif', 'serif';
+    @include fonts;
     transition: .4s;
     font-size: 20px;
     cursor: pointer;
-    margin-bottom: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
     text-transform: uppercase;
 
     &_active {

@@ -2,8 +2,8 @@
   <header class="header">
     <h1 class="header-headline">Your rss feeds</h1>
     <p class="header-subtitle">
-      Subscribe to news with rss
-      (<a href="https://edition.cnn.com/audio" target="_blank">some of feed you can see here</a>)
+      <span class="hide-xs">Subscribe to news with rss </span>
+      <a href="https://edition.cnn.com/audio" class="header-link" target="_blank">some of feed you can see here</a>
     </p>
   </header>
 </template>
@@ -20,16 +20,23 @@ export default {
   .header {
     padding: 20px;
     text-align: center;
-    color: #fff;
+    color: $white-color;
     background-color: $theme-color;
   }
 
   .header-headline {
-    margin-bottom: 20px;
-    font-size: 48px;
+    font-size: 42px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
   }
 
   .header-subtitle {
     font-size: 14px;
+  }
+
+  .header-link {
+    padding-bottom: 5px;
+    text-decoration: none;
+    border-bottom: 1px solid $white-color;
   }
 </style>
