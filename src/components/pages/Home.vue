@@ -5,6 +5,7 @@
     <main>
       <FeedForm></FeedForm>
       <FeedTitlesList></FeedTitlesList>
+
       <div class="content-wrapper">
         <FeedItemsList class="container"></FeedItemsList>
         <Statistic class="container"></Statistic>

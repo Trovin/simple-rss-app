@@ -7,11 +7,11 @@
         type="url"
         @blur="isFeedTouched = true"
         :class="{ error: isFeedError }"
-        placeholder="RSS API URL">
-      <button class="btn" :disabled="!isFeedValid" title="Add RSS url" type="submit">Add new</button>
+        placeholder="ENTER RSS API">
+      <button class="btn" :disabled="!isFeedValid" type="submit">Subscribe</button>
     </div>
 
-    <div class="fade-in error-message" v-if="isFeedError">You need enter a valid RSS URL</div>
+    <div class="fade-in error-message" v-if="isFeedError">Enter a valid RSS URL</div>
   </form>
 </template>
 
