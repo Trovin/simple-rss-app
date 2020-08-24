@@ -18,12 +18,14 @@
 <script>
 import { mapActions } from "vuex";
 
+import { INIT_FEEDS } from '../../store/action-types.js';
+
 import Header from '../base-layers/Header.vue';
-import FeedForm from '../elements/FeedForm.vue';
+import FeedForm from '../items/FeedForm.vue';
 import Statistic from '../containers/Statistic.vue';
-import SinglePost from '../elements/SinglePost.vue';
-import FeedItemsList from '../elements/FeedItemsList.vue';
-import FeedTitlesList from '../elements/FeedTitlesList.vue';
+import SinglePost from '../items/SinglePost.vue';
+import FeedItemsList from '../items/FeedItemsList.vue';
+import FeedTitlesList from '../items/FeedTitlesList.vue';
 
 export default {
   name: 'home',
@@ -36,10 +38,10 @@ export default {
     FeedTitlesList
   },
   methods: {
-    ...mapActions(['initFeeds'])
+    ...mapActions({ initApp: INIT_FEEDS })
   },
   mounted () {
-    this.initFeeds();
+    this.initApp();
   }
 }
 </script>

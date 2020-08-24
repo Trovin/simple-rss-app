@@ -17,18 +17,18 @@
     </p>
 
     <template v-if="selectedItem">
-      <Chart
-        v-bind:values="chartData.values"
-        v-bind:labels="chartData.labels"
-        v-bind:colors="chartData.colors">
-      </Chart>
+      <Chart v-bind:chartData="composeChartData"></Chart>
     </template>
   </div>
 </template>
 
 <script>
 import { randomColor } from 'randomcolor';
-import { mapState, mapGetters } from 'vuex';
+
+import {
+  mapState,
+  mapGetters
+} from 'vuex';
 
 import {
   GET_FEEDS_LENGTH,
@@ -36,14 +36,35 @@ import {
   GET_FEEDS_ITEMS_LENGTH,
   GET_SELECTED_FEED_ITEMS_LENGTH,
   GET_SELECTED_FEED_AUTHORS_LENGTH
-} from "../../store/getters";
+} from '../../store/getter-types';
 
-import Chart from '../elements/Chart.vue'
+import { SET_SELECTED_ITEM } from "../../store/mutation-types";
+
+import {
+  SELECTED_FEED_ITEM,
+  SELECTED_FEED_CATEGORY
+} from '../../store/state-types';
+
+import Chart from '../items/Chart.vue'
 
 export default {
   name: 'Statistic',
+  data () {
+    return {
+      colors: []
+    }
+  },
   components: {
     Chart
+  },
+  methods: {
+    composeColors() {
+      const maxLetters = 26;
+
+      for(let i = 0; i <= maxLetters; i++) {
+        this.colors.push(randomColor({ luminosity: 'light' }));
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -54,15 +75,17 @@ export default {
       selectedFeedAuthorsLength: GET_SELECTED_FEED_AUTHORS_LENGTH
     }),
     ...mapState({
-      feedsList: state => state.feedsList,
-      selectedItem: state => state.selectedFeedItem,
-      selectedCategory: state => state.selectedFeedCategory
+        selectedItem: state => state[SELECTED_FEED_ITEM],
+        selectedCategory: state => state[SELECTED_FEED_CATEGORY]
     }),
-    chartData: function() {
-      const stats = {
+    composeChartData: function () {
+      const chartData = {
         labels: [],
-        values: [],
-        colors: []
+        datasets: [{
+          data: [],
+          borderWidth: 1,
+          backgroundColor: []
+        }]
       };
 
       if(this.selectedItem.content) {
@@ -70,13 +93,25 @@ export default {
         const letters_list = new Set(content);
         for (let letter of letters_list) {
           let count = content.split(letter).length - 1;
-          stats.labels.push(letter);
-          stats.values.push(count);
-          stats.colors.push(randomColor({ luminosity: 'light' }));
+          chartData.labels.push(letter);
+          chartData.datasets[0].data.push(count);
+          chartData.datasets[0].backgroundColor = this.colors;
         }
       }
-      return stats;
+
+      return chartData;
     }
+  },
+  mounted() {
+    this.composeColors();
+    this.unsubscribe = this.$store.subscribe((mutation, state)  => {
+      if(mutation.type === SET_SELECTED_ITEM && !!state[SELECTED_FEED_ITEM]) {
+        this.composeChartData;
+      }
+    });
+  },
+  beforeDestroy() {
+    this.unsubscribe();
   }
 }
 </script>

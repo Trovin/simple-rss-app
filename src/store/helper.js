@@ -2,16 +2,10 @@ import Parser from 'rss-parser';
 
 const PARSER = new Parser();
 
-export const validation = (context, feed) => {
-  if(
-    !Object.prototype.hasOwnProperty.call(feed, 'title') ||
-    !Object.prototype.hasOwnProperty.call(feed, 'items')
-  ) {
-    context.state.isLoading = false;
-    alert('Feed data is invalid, check input URL');
-    throw new TypeError('Feed data is invalid, check input URL');
-  }
-};
+import {
+  LOADING,
+  ITEMS_LIST,
+} from './state-types';
 
 export const getData = async (context, api) => {
   let result;
@@ -19,7 +13,7 @@ export const getData = async (context, api) => {
   try {
     result = await PARSER.parseURL(api);
   } catch (error) {
-    context.state.isLoading = false;
+    context.state[LOADING] = false;
     alert('Something went wrong, check input URL');
     throw new URIError('Something went wrong, check input URL');
   }
@@ -28,6 +22,6 @@ export const getData = async (context, api) => {
 };
 
 export const setItems = (state, props) => {
-  props.items.forEach(item => item.category = props.category);
-  state.itemsList = [...state.itemsList, ...props.items];
+  props.items.map(item => item.category = props.category);
+  state[ITEMS_LIST] = [...state[ITEMS_LIST], ...props.items];
 };
