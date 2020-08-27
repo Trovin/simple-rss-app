@@ -1,8 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import store from './store'
-import VueGraph from 'vue-graph'
+import Vue from 'vue';
+import App from './App.vue';
 
-Vue.use(VueGraph)
+import store from './store';
+import vuetify from './plugins/vuetify';
 
-new Vue({ store, render: h => h(App),}).$mount('#app');
+import './share/directives/visibility';
+
+new Vue({
+  store,
+  vuetify,
+  render: h => h(App),
+}).$mount('#app');

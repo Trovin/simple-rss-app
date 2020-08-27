@@ -4,12 +4,12 @@
 
     <main>
       <FeedForm></FeedForm>
-      <FeedTitlesList></FeedTitlesList>
+      <FeedTitles></FeedTitles>
 
-      <div class="content-wrapper">
-        <FeedItemsList class="container"></FeedItemsList>
-        <Statistic class="container"></Statistic>
-        <SinglePost class="container"></SinglePost>
+      <div class="home-wrapper">
+        <PostTitles class="home-container"></PostTitles>
+        <Statistic class="home-container"></Statistic>
+        <SinglePost class="home-container"></SinglePost>
       </div>
     </main>
   </section>
@@ -21,11 +21,11 @@ import { mapActions } from "vuex";
 import { INIT_FEEDS } from '../../store/action-types.js';
 
 import Header from '../base-layers/Header.vue';
-import FeedForm from '../items/FeedForm.vue';
-import Statistic from '../containers/Statistic.vue';
-import SinglePost from '../items/SinglePost.vue';
-import FeedItemsList from '../items/FeedItemsList.vue';
-import FeedTitlesList from '../items/FeedTitlesList.vue';
+import FeedForm from '../common/FeedForm.vue';
+import Statistic from '../common/Statistic.vue';
+import PostTitles from '../common/PostTitles.vue';
+import FeedTitles from '../common/FeedTitles.vue';
+import SinglePost from '../common/SinglePost.vue';
 
 export default {
   name: 'home',
@@ -33,9 +33,9 @@ export default {
     Header,
     FeedForm,
     Statistic,
-    SinglePost,
-    FeedItemsList,
-    FeedTitlesList
+    PostTitles,
+    FeedTitles,
+    SinglePost
   },
   methods: {
     ...mapActions({ initApp: INIT_FEEDS })
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .content-wrapper {
+  .home-wrapper {
     display: flex;
   }
 </style>
