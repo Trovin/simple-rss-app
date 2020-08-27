@@ -5,7 +5,7 @@ const PARSER = new Parser();
 import {
   LOADING,
   ITEMS_LIST,
-} from './state-types';
+} from './types/state-types';
 
 export const getData = async (context, api) => {
   let result;

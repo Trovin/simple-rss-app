@@ -10,7 +10,7 @@ import {
   FEEDS_ITEMS_LIST,
   SELECTED_FEED_ITEM,
   SELECTED_FEED_CATEGORY
-} from './state-types';
+} from './types/state-types';
 
 import {
   GET_ITEMS,
@@ -19,7 +19,7 @@ import {
   GET_FEEDS_ITEMS_LENGTH,
   GET_SELECTED_FEED_ITEMS_LENGTH,
   GET_SELECTED_FEED_AUTHORS_LENGTH
-} from './getter-types';
+} from './types/getter-types';
 
 import {
   SET_FEEDS,
@@ -31,12 +31,12 @@ import {
   SET_LOADING_STATE,
   SET_SELECTED_ITEM,
   SET_ACTIVE_CATEGORY
-} from './mutation-types';
+} from './types/mutation-types';
 
 import {
   INIT_FEEDS,
   ADD_NEW_FEED
-} from './action-types';
+} from './types/action-types';
 
 import { getData } from './helper';
 import { setItems } from './helper';
@@ -97,7 +97,7 @@ export default new Vuex.Store({
       this.state[FEEDS].push(data.feed);
       this.state[FEEDS_LIST].push(data.api);
       setItems(state, { category: data.feed.feedUrl, items: data.feed.items });
-      this.state[TITLES_LIST].push(data.feed.title);
+      this.state[TITLES_LIST].push({ title: data.feed.title, key: data.feed.feedUrl });
       this.state[LOADING] = false;
     },
     [PARSE_FEEDS_DATA] (state, feeds) {

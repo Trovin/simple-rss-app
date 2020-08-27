@@ -1,7 +1,7 @@
 import {
   LOADING,
   FEEDS_LIST
-} from './state-types';
+} from './types/state-types';
 
 export const feedApiValidation = (context, api) => {
   if(context.state[FEEDS_LIST].includes(api)) {

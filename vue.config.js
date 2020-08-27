@@ -11,7 +11,7 @@ module.exports = {
             name: "fonts/[name].[ext]",
           },
         },
-      }]
+      },]
     }
   }
 };

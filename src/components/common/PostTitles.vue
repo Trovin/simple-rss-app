@@ -19,14 +19,14 @@ import {
   mapGetters
 } from 'vuex';
 
-import { SELECTED_FEED_ITEM } from '../../store/state-types';
+import { SELECTED_FEED_ITEM } from '../../store/types/state-types';
 
-import { GET_ITEMS } from '../../store/getter-types';
+import { GET_ITEMS } from '../../store/types/getter-types';
 
 import {
   SET_SELECTED_ITEM,
   SET_ACTIVE_CATEGORY
-} from '../../store/mutation-types';
+} from '../../store/types/mutation-types';
 
 export default {
   name: 'PostTitles',

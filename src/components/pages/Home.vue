@@ -18,7 +18,7 @@
 <script>
 import { mapActions } from "vuex";
 
-import { INIT_FEEDS } from '../../store/action-types.js';
+import { INIT_FEEDS } from '../../store/types/action-types.js';
 
 import Header from '../base-layers/Header.vue';
 import FeedForm from '../common/FeedForm.vue';

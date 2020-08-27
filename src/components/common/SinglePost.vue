@@ -9,7 +9,7 @@
 <script>
 import { mapState } from 'vuex';
 
-import { SELECTED_FEED_ITEM } from '../../store/state-types';
+import { SELECTED_FEED_ITEM } from '../../store/types/state-types';
 
 export default {
   name: 'SinglePost',

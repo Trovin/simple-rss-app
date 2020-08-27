@@ -1,24 +1,33 @@
 <template>
-  <form class="wrapper form-wrapper" @submit.prevent="handleSubmit()">
+  <v-form
+    ref="form"
+    v-model="valid"
+    @submit.prevent="handleSubmit()"
+    class="wrapper form-wrapper">
+
     <v-text-field
       type="url"
       class="form-input"
-      :rules="rules"
-      @blur="isFeedTouched = true"
-      v-model="feedApi"
       label="ENTER RSS API"
+      v-model="api"
+      :rules="apiRules"
       clearable
       hide-details="auto">
     </v-text-field>
 
-    <button class="btn" :disabled="!isFeedValid" title="Add RSS url" type="submit">SUBSCRIBE</button>
-  </form>
+    <button
+      class="btn"
+      :disabled="!valid"
+      type="submit">
+      SUBSCRIBE
+    </button>
+  </v-form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
-import { ADD_NEW_FEED } from '../../store/action-types';
+import { ADD_NEW_FEED } from '../../store/types/action-types';
 
 const URL_REGEX = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 
@@ -26,32 +35,22 @@ export default {
   name: 'FeedForm',
   data () {
     return {
-      feedApi: null,
-      isFeedTouched: false,
-      rules: [
+      valid: true,
+      api: '',
+      apiRules: [
         value => !!value || 'Field data is required',
-        value => {
-          const pattern = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
-          return pattern.test(value) || 'Invalid url'
-        },
-      ]
+        value => URL_REGEX.test(value) || 'Invalid url'
+      ],
+      lazy: false
     }
-  },
-  computed: {
-    isFeedValid() {
-      return URL_REGEX.test(this.feedApi);
-    },
-    isFeedError() {
-      return !this.isFeedValid && this.isFeedTouched;
-    },
   },
   methods: {
     ...mapActions({ addNewFeed: ADD_NEW_FEED }),
     handleSubmit() {
-      this.addNewFeed({ api: this.feedApi });
-      this.feedApi = '';
-      this.isFeedTouched = false;
-    }
+      this.addNewFeed({ api: this.api });
+      this.$refs.form.reset();
+      this.$refs.form.resetValidation();
+    },
   }
 }
 </script>

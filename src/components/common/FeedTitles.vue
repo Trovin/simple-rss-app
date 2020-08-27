@@ -24,9 +24,9 @@ import {
   LOADING,
   TITLES_LIST,
   SELECTED_FEED_CATEGORY
-} from '../../store/state-types';
+} from '../../store/types/state-types';
 
-import { SET_ACTIVE_CATEGORY } from '../../store/mutation-types';
+import { SET_ACTIVE_CATEGORY } from '../../store/types/mutation-types';
 
 export default {
   name: 'FeedTitles',

@@ -1,6 +1,9 @@
 <template>
   <header class="header">
-    <h1 class="header-headline">Your rss feeds</h1>
+    <h1 class="header-headline">
+      Your rss feeds
+      <font-awesome-icon class="close-icon" :icon="['fas', 'rss']"></font-awesome-icon>
+    </h1>
     <p class="header-subtitle">
       <span class="hide-xs">Subscribe to news with rss </span>
       <a href="https://edition.cnn.com/audio" class="header-link" target="_blank">some of feed you can see here</a>

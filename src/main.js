@@ -4,6 +4,8 @@ import App from './App.vue';
 import store from './store';
 import vuetify from './plugins/vuetify';
 
+import './libs/fa.config';
+
 import './share/directives/visibility';
 
 new Vue({

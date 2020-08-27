@@ -36,14 +36,14 @@ import {
   GET_FEEDS_ITEMS_LENGTH,
   GET_SELECTED_FEED_ITEMS_LENGTH,
   GET_SELECTED_FEED_AUTHORS_LENGTH
-} from '../../store/getter-types';
+} from '../../store/types/getter-types';
 
-import { SET_SELECTED_ITEM } from "../../store/mutation-types";
+import { SET_SELECTED_ITEM } from "../../store/types/mutation-types";
 
 import {
   SELECTED_FEED_ITEM,
   SELECTED_FEED_CATEGORY
-} from '../../store/state-types';
+} from '../../store/types/state-types';
 
 import Chart from './Chart.vue'
 
