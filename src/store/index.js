@@ -96,15 +96,15 @@ export default new Vuex.Store({
     [PARSE_FEED_DATA] (state, data) {
       this.state[FEEDS].push(data.feed);
       this.state[FEEDS_LIST].push(data.api);
-      setItems(state, { category: data.feed.title, items: data.feed.items });
+      setItems(state, { category: data.feed.feedUrl, items: data.feed.items });
       this.state[TITLES_LIST].push(data.feed.title);
       this.state[LOADING] = false;
     },
     [PARSE_FEEDS_DATA] (state, feeds) {
       feeds.forEach(feed => {
         this.state[FEEDS].push(feed);
-        setItems(state, { category: feed.title, items: feed.items });
-        this.state[TITLES_LIST].push(feed.title);
+        setItems(state, { category: feed.feedUrl, items: feed.items });
+        this.state[TITLES_LIST].push({ title: feed.title, key: feed.feedUrl });
       });
       this.state[LOADING] = false;
     },
@@ -132,12 +132,10 @@ export default new Vuex.Store({
       this.commit(PARSE_FEEDS_DATA, feeds);
     },
     async [ADD_NEW_FEED] (context, payload) {
-      feedApiValidation(context, payload.api);
       this.commit(SET_LOADING_STATE, true);
-
+      feedApiValidation(context, payload.api);
       const feed = await getData(context, payload.api);
       feedDataValidation(context, feed);
-
       this.commit(PARSE_FEED_DATA, { feed: feed, api: payload.api });
     }
   },
