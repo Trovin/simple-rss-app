@@ -22,6 +22,6 @@ export const getData = async (context, api) => {
 };
 
 export const setItems = (state, props) => {
-  props.items.map(item => item.category = props.category);
+  props.items.map(item => item.categoryId = props.categoryId);
   state[ITEMS_LIST] = [...state[ITEMS_LIST], ...props.items];
 };

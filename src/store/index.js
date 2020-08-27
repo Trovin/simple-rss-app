@@ -65,15 +65,15 @@ export default new Vuex.Store({
       if(!state[SELECTED_FEED_CATEGORY]) {
         return state[ITEMS_LIST];
       } else {
-        return state[ITEMS_LIST].filter(el => el.category === state[SELECTED_FEED_CATEGORY]);
+        return state[ITEMS_LIST].filter(el => el.categoryId === state[SELECTED_FEED_CATEGORY]);
       }
     },
     [GET_FEEDS_LENGTH]: state => state[FEEDS].length,
-    [GET_SELECTED_FEED]: state => state[FEEDS].find(feed => feed.title === state[SELECTED_FEED_CATEGORY]),
+    [GET_SELECTED_FEED]: state => state[FEEDS].find(feed => feed.feedUrl === state[SELECTED_FEED_CATEGORY]),
     [GET_FEEDS_ITEMS_LENGTH]: state => state[ITEMS_LIST].length,
-    [GET_SELECTED_FEED_ITEMS_LENGTH]: state => state[FEEDS].find(feed => feed.title === state[SELECTED_FEED_CATEGORY]).items.length,
+    [GET_SELECTED_FEED_ITEMS_LENGTH]: state => state[FEEDS].find(feed => feed.feedUrl === state[SELECTED_FEED_CATEGORY]).items.length,
     [GET_SELECTED_FEED_AUTHORS_LENGTH]: state => {
-      const item = state[FEEDS].find(feed => feed.title === state[SELECTED_FEED_CATEGORY]);
+      const item = state[FEEDS].find(feed => feed.feedUrl === state[SELECTED_FEED_CATEGORY]);
       return Array.from(new Set(item.items.map(item => item.itunes.author))).length;
     }
   },
@@ -96,15 +96,15 @@ export default new Vuex.Store({
     [PARSE_FEED_DATA] (state, data) {
       this.state[FEEDS].push(data.feed);
       this.state[FEEDS_LIST].push(data.api);
-      setItems(state, { category: data.feed.feedUrl, items: data.feed.items });
-      this.state[TITLES_LIST].push({ title: data.feed.title, key: data.feed.feedUrl });
+      setItems(state, { categoryId: data.feed.feedUrl, items: data.feed.items });
+      this.state[TITLES_LIST].push({ title: data.feed.title, categoryId: data.feed.feedUrl });
       this.state[LOADING] = false;
     },
     [PARSE_FEEDS_DATA] (state, feeds) {
       feeds.forEach(feed => {
         this.state[FEEDS].push(feed);
-        setItems(state, { category: feed.feedUrl, items: feed.items });
-        this.state[TITLES_LIST].push({ title: feed.title, key: feed.feedUrl });
+        setItems(state, { categoryId: feed.feedUrl, items: feed.items });
+        this.state[TITLES_LIST].push({ title: feed.title, categoryId: feed.feedUrl });
       });
       this.state[LOADING] = false;
     },

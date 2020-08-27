@@ -6,9 +6,12 @@
 @import './_typography';
 @import './_media.scss';
 
+@import '~vuetify/src/styles/styles.sass';
+
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";   // fas
 @import "~@fortawesome/fontawesome-free/scss/regular"; // far
 @import "~@fortawesome/fontawesome-free/scss/brands";  // fab
+
 

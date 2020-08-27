@@ -15,12 +15,7 @@
       hide-details="auto">
     </v-text-field>
 
-    <button
-      class="btn"
-      :disabled="!valid"
-      type="submit">
-      SUBSCRIBE
-    </button>
+    <v-btn :disabled="!valid" type="submit" outlined large>SUBSCRIBE</v-btn>
   </v-form>
 </template>
 

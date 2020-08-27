@@ -3,11 +3,11 @@
     <h2 v-if="!items">Feeds is empty ...</h2>
     <v-progress-circular class="mb-1" indeterminate v-visible="!loading"></v-progress-circular>
 
-    <div v-for="item in items" :key="item.key">
+    <div v-for="item in items" :key="item.categoryId">
       <span
         class="feed-title fade-in"
-        v-on:click="setActiveCategory(item.key)"
-        v-bind:class="{ 'feed-title_active': selectedCategory === item.key }">
+        v-on:click="setActiveCategory(item.categoryId)"
+        v-bind:class="{ 'feed-title_active': selectedCategory === item.categoryId }">
         {{item.title}}
       </span>
     </div>
@@ -41,7 +41,6 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
   @import '../../assets/styles/mixins';
   @import '../../assets/styles/variables';
@@ -53,10 +52,27 @@ export default {
     cursor: pointer;
     display: inline-block;
     margin-bottom: 10px;
+    position: relative;
     text-transform: uppercase;
+
+    &::before {
+      content: '';
+      width: 0;
+      height: 2px;
+      display: block;
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      transition: $transition;
+      background-color: $theme-color;
+    }
 
     &_active {
       color: $theme-color;
+
+      &::before {
+        width: 100%;
+      }
     }
   }
 </style>

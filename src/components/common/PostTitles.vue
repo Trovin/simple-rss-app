@@ -6,7 +6,7 @@
         v-for="item in items" :key="item.guid"
         v-on:click="setActiveItem(item)"
         v-bind:class="{ 'feed-item_active': selectedItem.guid === item.guid }">
-        <h3 class="feed-item__title">Title: {{item.title}}</h3>
+        <h3 class="feed-item__title">{{item.title}}</h3>
       </li>
     </ul>
   </nav>
@@ -39,7 +39,7 @@ export default {
   methods: {
     ...mapMutations({ selectItem: SET_SELECTED_ITEM, setCategory: SET_ACTIVE_CATEGORY }),
     setActiveItem(item) {
-      this.setCategory(item.category);
+      this.setCategory(item.categoryId);
       this.selectItem(item);
     }
   }

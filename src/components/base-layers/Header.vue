@@ -22,7 +22,7 @@ export default { name: 'Header' }
     padding: 20px;
     text-align: center;
     color: $white-color;
-    background-color: $theme-color;
+    background-color: $black-color;
   }
 
   .header-headline {
